@@ -1,14 +1,16 @@
 import openpyxl
 
 def main():
+    # nomes dos arquivos
     arquivo_dados = 'turnos.xlsx'
     arquivo_separado = 'horarios_separados.xlsx'
-    book = openpyxl.load_workbook(arquivo_dados) # carregar a planilha com os dados
-    book2 = openpyxl.Workbook(arquivo_separado) # cria uma planilha
 
-    paginas_planilha = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'] # páginas da planilha
+    book = openpyxl.load_workbook(arquivo_dados) # carrega a planilha com os dados
+    book2 = openpyxl.Workbook(arquivo_separado) # cria uma planilha vazia
 
-    # criar as páginas da planilha
+    paginas_planilha = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Erro'] # páginas da planilha
+
+    # cria as páginas da planilha
     for pagina in paginas_planilha:
         book2.create_sheet(pagina) 
     
@@ -19,6 +21,9 @@ def main():
 
     errado = book2['Erro']
     quant = 2
+
+    dias_semana = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
+
     for dia in dias_semana:
         dia_semana = book2[dia] # selecionar a pagina da planilha pra editar
         
@@ -51,7 +56,7 @@ def main():
         errado.append([nome])
 
     # salva a planilha
-    book2.save('Horarios_separados.xlsx')
+    book2.save(arquivo_separado)
     
 if __name__ == '__main__':
     try:
