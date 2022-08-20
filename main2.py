@@ -50,7 +50,7 @@ def main():
                 contador += 1
                 dia_semana.append([contador, rows[1].value, ' ', 'X']) # adiciona os dados na primeira linha
 
-        dia_semana.append([' ', ' ', quant_mat, quant_vesp]) # a quantidade de pessoas em cada turno no dia
+        dia_semana.append(['Total', ' ', quant_mat, quant_vesp]) # a quantidade de pessoas em cada turno no dia
     
     for nome in marcaram_errado:
         errado.append([nome])
