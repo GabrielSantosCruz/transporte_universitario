@@ -1,9 +1,10 @@
 import openpyxl
+from sys import argv
 
 def main():
     # nomes dos arquivos
-    arquivo_dados = 'turnos.xlsx'
-    arquivo_separado = 'horarios_separados.xlsx'
+    arquivo_dados = argv[1]
+    arquivo_separado = argv[2]
 
     book = openpyxl.load_workbook(arquivo_dados) # carrega a planilha com os dados
     book2 = openpyxl.Workbook(arquivo_separado) # cria uma planilha vazia
@@ -45,6 +46,7 @@ def main():
                 quant_mat += 1
                 contador += 1
                 dia_semana.append([contador, rows[1].value, 'X', ' ']) # adiciona os dados na primeira linha
+
             elif rows[quant].value == 'Vespertino':
                 quant_vesp += 1
                 contador += 1
@@ -52,11 +54,14 @@ def main():
 
         dia_semana.append(['Total', ' ', quant_mat, quant_vesp]) # a quantidade de pessoas em cada turno no dia
     
+    # separa os nomes de quem preencheu o formulário de forma errada
     for nome in marcaram_errado:
         errado.append([nome])
 
     # salva a planilha
     book2.save(arquivo_separado)
+
+    print('Dados filtrados e separados!')
     
 if __name__ == '__main__':
     try:
